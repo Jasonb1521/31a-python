@@ -1,0 +1,41 @@
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+# Function to generate a random OTP
+def generate_otp():
+    return str(random.randint(100000, 999999))  # 6-digit OTP
+
+# Function to verify OTP
+def verify_otp():
+    user_otp = entry_otp.get()
+    if user_otp == generated_otp:
+        messagebox.showinfo("Success", "OTP verification successful!")
+    else:
+        messagebox.showerror("Error", "Invalid OTP. Please try again.")
+
+# Function to send OTP via email (replace with SMS or any other delivery method)
+def send_otp_via_email():
+    global generated_otp
+    generated_otp = generate_otp()
+    # Simulate sending OTP via email (replace with actual sending mechanism)
+    print("OTP sent via email:", generated_otp)
+
+# Create main window
+root = tk.Tk()
+root.title("OTP Verification")
+
+# Generate OTP button
+btn_generate = tk.Button(root, text="Generate OTP", command=send_otp_via_email)
+btn_generate.pack(pady=10)
+
+# OTP entry field
+entry_otp = tk.Entry(root, width=10, font=("Arial", 16))
+entry_otp.pack(pady=5)
+
+# Verify OTP button
+btn_verify = tk.Button(root, text="Verify OTP", command=verify_otp)
+btn_verify.pack(pady=5)
+
+# Run the GUI
+root.mainloop()
